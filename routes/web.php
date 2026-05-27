@@ -1,15 +1,23 @@
 <?php
 
+use App\Http\Controllers\NoteController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('notes.index');
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return redirect()->route('notes.index');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware(['auth'])->group(function () {
+    Route::patch('/notes/{note}/toggle-pin', [NoteController::class, 'togglePin'])
+        ->name('notes.toggle-pin');
+
+    Route::resource('notes', NoteController::class);
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
