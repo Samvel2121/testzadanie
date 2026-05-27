@@ -14,19 +14,16 @@ class NoteController extends Controller
 {
     public function index(Request $request): View
     {
-        $search = $request->string('search')->toString();
+        $search = $request->string('q')->toString();
 
         $notes = Note::query()
             ->where('user_id', $request->user()->id)
             ->when($search, function ($query) use ($search) {
-                $query->where(function ($query) use ($search) {
-                    $query->where('title', 'like', "%{$search}%")
-                        ->orWhere('content', 'like', "%{$search}%");
-                });
+                $query->where('title', 'like', "%{$search}%");
             })
             ->orderByDesc('is_pinned')
             ->orderByDesc('updated_at')
-            ->paginate(9)
+            ->paginate(20)
             ->withQueryString();
 
         return view('notes.index', compact('notes', 'search'));

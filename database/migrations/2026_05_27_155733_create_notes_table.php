@@ -17,7 +17,7 @@ return new class extends Migration
 
             $table->string('title');
             $table->text('content')->nullable();
-            $table->string('color', 20)->default('#ffffff');
+            $table->string('color', 7)->default('#6366f1');
             $table->boolean('is_pinned')->default(false);
             $table->timestamps();
 
