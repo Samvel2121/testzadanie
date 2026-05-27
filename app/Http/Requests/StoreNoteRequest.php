@@ -16,7 +16,7 @@ class StoreNoteRequest extends FormRequest
         return [
             'title' => ['required', 'string', 'max:255'],
             'content' => ['nullable', 'string'],
-            'color' => ['required', 'string', 'max:20', 'regex:/^#[0-9A-Fa-f]{6}$/'],
+            'color' => ['required', 'string', 'size:7', 'regex:/^#[0-9A-Fa-f]{6}$/'],
         ];
     }
 }

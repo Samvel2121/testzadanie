@@ -24,9 +24,9 @@
             <form method="GET" action="{{ route('notes.index') }}" class="mb-6">
                 <div class="flex gap-2">
                     <input type="text"
-                           name="search"
+                           name="q"
                            value="{{ $search }}"
-                           placeholder="Поиск по названию или тексту..."
+                           placeholder="Поиск по заголовку..."
                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
 
                     <button type="submit"
@@ -52,7 +52,7 @@
                                 pinned: @js($note->is_pinned),
                                 async togglePin() {
                                     const response = await fetch('{{ route('notes.toggle-pin', $note) }}', {
-                                        method: 'PATCH',
+                                        method: 'POST',
                                         headers: {
                                             'X-CSRF-TOKEN': '{{ csrf_token() }}',
                                             'Accept': 'application/json',
@@ -98,7 +98,6 @@
                                       action="{{ route('notes.destroy', $note) }}"
                                       onsubmit="return confirm('Удалить заметку?')">
                                     @csrf
-                                    @method('DELETE')
 
                                     <button type="submit"
                                             class="text-red-700 hover:underline">

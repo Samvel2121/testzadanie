@@ -39,7 +39,7 @@
                         @enderror
                     </div>
 
-                    <div class="mt-4" x-data="{ color: '{{ old('color', '#ffffff') }}' }">
+                    <div class="mt-4" x-data="{ color: '{{ old('color', '#6366f1') }}' }">
                         <label class="block font-medium text-sm text-gray-700">
                             Цвет
                         </label>
@@ -47,7 +47,7 @@
                         <input type="hidden" name="color" x-model="color">
 
                         <div class="mt-2 flex gap-3">
-                            @foreach (['#ffffff', '#fef3c7', '#dcfce7', '#dbeafe', '#fce7f3', '#ede9fe'] as $color)
+                            @foreach (['#6366f1', '#ffffff', '#fef3c7', '#dcfce7', '#dbeafe', '#fce7f3', '#ede9fe'] as $color)
                                 <button type="button"
                                         @click="color = '{{ $color }}'"
                                         class="w-9 h-9 rounded-full border-2"
